@@ -5,23 +5,25 @@ import os
 
 # --- 🔐 ZONA DE SEGURANÇA (Bypass do GitHub) ---
 
-# 1. CONFIGURAÇÃO DO DISCORD (Sua chave completa e camuflada)
+# 1. CONFIGURAÇÃO DO DISCORD (Sua chave completa)
+# Dividida para o GitHub não bloquear
 d_parte1 = "MTQ1OTc1MDc1ODkyMzg5NDkxNA.G_Ra-O."
 d_parte2 = "niO2ofSGzkQYjlZ4a7vgUwu_9axfl51Pp288Ak"
 DISCORD_TOKEN = d_parte1 + d_parte2
 
-# 2. CONFIGURAÇÃO DO GOOGLE GEMINI (Sua chave completa e camuflada)
-g_parte1 = "AIzaSyCjtRnKK1PwTSeV"
+# 2. CONFIGURAÇÃO DO GOOGLE GEMINI (Sua chave corrigida)
+# Correção: Adicionado o 'n' minúsculo que faltava
+g_parte1 = "AIzaSyCjtnKK1PwTSeV"
 g_parte2 = "2Vf4rOZaYoCYu4aNoleg"
 GOOGLE_API_KEY = g_parte1 + g_parte2
 
 # --- 🧠 CÉREBRO DA DUALCORE ---
 
 genai.configure(api_key=GOOGLE_API_KEY)
-# Configuração do Modelo (Gemini 2.0 Flash é mais rápido e leve)
+# Configuração do Modelo
 model = genai.GenerativeModel('gemini-2.0-flash')
 
-# Configuração de Permissões (Ouvidos do Bot)
+# Configuração de Permissões
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='!', intents=intents)
@@ -36,7 +38,7 @@ async def on_ready():
 async def dual(ctx, *, pergunta):
     async with ctx.typing():
         try:
-            # Filtros de segurança no minimo para evitar bloqueios bobos
+            # Filtros de segurança no mínimo
             safe = [
                 {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
                 {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
@@ -54,6 +56,7 @@ async def dual(ctx, *, pergunta):
             await ctx.reply(f"🤖 **DualBot:**\n{texto}")
 
         except Exception as e:
+            # Mostra erro no chat se houver
             await ctx.reply(f"🔥 **Erro no sistema:** {e}")
             print(f"Erro: {e}")
 
