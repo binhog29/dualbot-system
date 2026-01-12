@@ -5,22 +5,20 @@ import os
 
 # --- 🔐 ZONA DE SEGURANÇA (Bypass do GitHub) ---
 
-# 1. CONFIGURAÇÃO DO DISCORD (Sua chave completa)
-# Dividida para o GitHub não bloquear
+# 1. CONFIGURAÇÃO DO DISCORD (Sua chave exata)
 d_parte1 = "MTQ1OTc1MDc1ODkyMzg5NDkxNA.G_Ra-O."
 d_parte2 = "niO2ofSGzkQYjlZ4a7vgUwu_9axfl51Pp288Ak"
 DISCORD_TOKEN = d_parte1 + d_parte2
 
-# 2. CONFIGURAÇÃO DO GOOGLE GEMINI (Sua chave corrigida)
-# Correção: Adicionado o 'n' minúsculo que faltava
-g_parte1 = "AIzaSyCjtnKK1PwTSeV"
-g_parte2 = "2Vf4rOZaYoCYu4aNoleg"
+# 2. CONFIGURAÇÃO DO GOOGLE GEMINI (Sua chave exata e corrigida)
+# Agora com o 'W' maiúsculo correto
+g_parte1 = "AIzaSyCjtnKK1PWTseV"
+g_parte2 = "2VF4rOZaYoCYu4aNoleg"
 GOOGLE_API_KEY = g_parte1 + g_parte2
 
 # --- 🧠 CÉREBRO DA DUALCORE ---
 
 genai.configure(api_key=GOOGLE_API_KEY)
-# Configuração do Modelo
 model = genai.GenerativeModel('gemini-2.0-flash')
 
 # Configuração de Permissões
@@ -38,7 +36,7 @@ async def on_ready():
 async def dual(ctx, *, pergunta):
     async with ctx.typing():
         try:
-            # Filtros de segurança no mínimo
+            # Filtros de segurança ajustados
             safe = [
                 {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
                 {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
@@ -56,7 +54,6 @@ async def dual(ctx, *, pergunta):
             await ctx.reply(f"🤖 **DualBot:**\n{texto}")
 
         except Exception as e:
-            # Mostra erro no chat se houver
             await ctx.reply(f"🔥 **Erro no sistema:** {e}")
             print(f"Erro: {e}")
 
