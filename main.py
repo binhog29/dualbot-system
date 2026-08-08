@@ -4,13 +4,8 @@ import google.generativeai as genai
 import os
 
 # --- 🔐 ZONA DE SEGURANÇA ---
-d_parte1 = "MTQ1OTc1MDc1ODkyMzg5NDkxNA.G_Ra-O."
-d_parte2 = "niO2ofSGzkQYjlZ4a7vgUwu_9axfl51Pp288Ak"
-DISCORD_TOKEN = d_parte1 + d_parte2
-
-g_parte1 = "AIzaSyCjtnKK1PWTseV"
-g_parte2 = "2VF4rOZaYoCYu4aNoleg"
-GOOGLE_API_KEY = g_parte1 + g_parte2
+DISCORD_TOKEN = os.environ.get("DISCORD_TOKEN")
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
 
 # --- 🧠 CÉREBRO DA DUALCORE ---
 genai.configure(api_key=GOOGLE_API_KEY)
